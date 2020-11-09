@@ -1,0 +1,29 @@
+// DOM selector
+const form   = docment.getElementById('form');
+const search = document.getElementById('search');
+const result = document.getElementById('result');
+const more   = document.getElementById('more');
+
+const apiURL = 'https://api.lyrics.ovh'
+
+async function searchSongs(term) {
+ const res  = await fetch(`${apiURL}/suggest${term}`)
+ const data = await res.json()
+ 
+ showData(data)
+}
+
+function showData(data) {
+    result.innerHTML = `
+    <ul class="songs">
+    ${data.data
+    .map(item
+    song => `<li>
+    <span><strong>${song.artist.name}</strong>- ${song.title}</span>
+    <button class="btn" data-artist="${song.artist}" data-title="${song.title}">Get Lyrics</button>
+    </li>`)
+    .join('')
+    }
+    </ul>
+    `
+}
