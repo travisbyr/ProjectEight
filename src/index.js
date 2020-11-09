@@ -17,7 +17,7 @@ function showData(data) {
     result.innerHTML = `
     <ul class="songs">
     ${data.data
-    .map(item
+    .map(
     song => `<li>
     <span><strong>${song.artist.name}</strong>- ${song.title}</span>
     <button class="btn" data-artist="${song.artist}" data-title="${song.title}">Get Lyrics</button>
@@ -26,4 +26,16 @@ function showData(data) {
     }
     </ul>
     `
+    if(data.prev || data.next) {
+        more.innerHTML = `
+        ${
+            data.prev ? `<button class="btn" onclick="getMoreSongs('${data.prev}')">Prev</button>` : ''
+        }
+        ${
+            data.next ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>` : ''
+        }
+        `
+    } else {
+        more.innerHTML = ''
+    }
 }
